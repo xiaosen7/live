@@ -95,7 +95,7 @@ export default function useForm(form) {
       formRef.current = form;
     } else {
       const formStore = new FormStore();
-      formRef.current = formStore;
+      formRef.current = formStore.getForm();
     }
   }
 
