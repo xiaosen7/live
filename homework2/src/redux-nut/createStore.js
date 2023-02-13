@@ -4,27 +4,25 @@ export function createStore(reducer, enhancer) {
   }
 
   let currentState;
-  let currentSubscriptions = new Map();
+  let listeners = new Map();
 
   function dispatch(action) {
     currentState = reducer(currentState, action);
-
-    const subscriptions = currentSubscriptions.values();
-    Array.from(subscriptions).forEach((fn) => fn());
+    listeners.forEach((l) => l());
   }
 
   function getState() {
     return currentState;
   }
 
-  let id = 0;
+  let countId = 0;
   function subscribe(onStoreUpdate) {
-    const currentId = id;
-    currentSubscriptions.set(currentId, onStoreUpdate);
+    const currentId = countId;
+    listeners.set(currentId, onStoreUpdate);
 
-    id += 1;
+    countId += 1;
     return () => {
-      currentSubscriptions.delete(currentId);
+      listeners.delete(currentId);
     };
   }
 
