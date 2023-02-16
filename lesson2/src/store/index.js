@@ -1,10 +1,10 @@
 import isPromise from "is-promise";
-// import {createStore, applyMiddleware, combineReducers} from "redux";
+import {createStore, applyMiddleware, combineReducers} from "redux";
 // import thunk from "redux-thunk";
 // import logger from "redux-logger";
 // import promise from "redux-promise";
 
-import {createStore, applyMiddleware, combineReducers} from "../redux-nut";
+// import {createStore, applyMiddleware, combineReducers} from "../redux-nut";
 
 // 定义了store修改规则
 export function countReducer(state = 0, action) {
