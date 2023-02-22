@@ -1,12 +1,12 @@
-import {useCallback, useContext, useMemo} from "react";
-import {normalizePathname} from "./utils";
+import { useCallback, useContext, useMemo } from "react";
+import { normalizePathname } from "./utils";
 import {
   DataRouterStateContext,
   NavigationContext,
   RouteContext,
 } from "./Context";
 import Outlet from "./Outlet";
-import {matchRoutes, matchPath} from "react-router-dom";
+import { matchRoutes, matchPath } from "react-router-dom";
 
 export function useRoutes(routes) {
   // ? 以下匹配必须刷新页面才能更新，因为如果 path 变化，想要页面更新，需主动引起
@@ -20,7 +20,7 @@ export function useRoutes(routes) {
 
   const pathname = location.pathname;
 
-  const matches = matchRoutes(routes, {pathname});
+  const matches = matchRoutes(routes, { pathname });
   return renderMatches(matches);
 }
 
@@ -34,7 +34,7 @@ function renderMatches(matches) {
   return matches.reduceRight((outlet, match) => {
     return (
       <RouteContext.Provider
-        value={{outlet, matches}}
+        value={{ outlet, matches }}
         children={match.route.element || outlet}
       />
     );
@@ -43,7 +43,7 @@ function renderMatches(matches) {
 
 // 路由跳转函数
 export function useNavigate() {
-  const {navigator} = useContext(NavigationContext);
+  const { navigator } = useContext(NavigationContext);
   // return navigator.push;
 
   const navigate = useCallback(
@@ -65,17 +65,17 @@ export function useNavigate() {
 
 // 路由跳转函数
 export function useLocation() {
-  const {location} = useContext(NavigationContext);
+  const { location } = useContext(NavigationContext);
   return location;
 }
 
 export function useOutlet() {
-  const {outlet} = useContext(RouteContext);
+  const { outlet } = useContext(RouteContext);
   return outlet;
 }
 
 export function useParams() {
-  const {matches} = useContext(RouteContext);
+  const { matches } = useContext(RouteContext);
 
   const routeMatch = matches[matches.length - 1];
   return routeMatch ? routeMatch.params : {};
@@ -104,12 +104,12 @@ export function useParams() {
 // }
 
 export function useMatch(pattern) {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   return useMemo(() => matchPath(pattern, pathname), [pathname, pattern]);
 }
 
 export function useResolvedPath(to) {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
   return useMemo(
     () => ({
