@@ -12,3 +12,7 @@ export default function ProductDetail(props) {
     </div>
   );
 }
+
+// router6: 跳转页面
+// 组件 Link| NavLink\ Navigate
+// 命令式条件 useNavigate()

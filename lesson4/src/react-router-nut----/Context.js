@@ -4,4 +4,5 @@ const NavigationContext = createContext();
 
 const RouteContext = createContext();
 
-export {NavigationContext, RouteContext};
+const DataRouterContext = createContext();
+export {NavigationContext, RouteContext, DataRouterContext};

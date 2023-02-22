@@ -1,7 +1,7 @@
 import {normalizePathname} from "./utils";
-import {useContext} from "react";
+import {useCallback, useContext} from "react";
 import {NavigationContext, RouterContext} from "./Context";
-import {matchRoutes} from "react-router-dom";
+import {matchRoutes, matchPath} from "react-router-dom";
 
 // 只有消费了context value的后代组件才需要更新
 // 遍历数组，找到要渲染的组件，注意嵌套
@@ -26,11 +26,6 @@ function renderMatches(matches) {
     return;
   }
 
-  console.log(
-    "%c [  ]-30",
-    "font-size:13px; background:pink; color:#bf2c9f;",
-    matches
-  );
   return matches.reduceRight((outlet, match) => {
     return (
       <RouterContext.Provider
@@ -41,18 +36,57 @@ function renderMatches(matches) {
   }, null);
 }
 
+// navigate: to(path: string|number)
 export function useNavigate() {
   const {navigator} = useContext(NavigationContext);
   // todo 详细实现
-  return navigator.push;
+  // return navigator.push;
+
+  // go(s) s:number
+  const navigate = useCallback(
+    (to, options = {}) => {
+      if (typeof to === "number") {
+        navigator.go(to);
+        return;
+      }
+
+      (!!options.replace ? navigator.replace : navigator.push)(
+        to,
+        options.state
+      );
+    },
+    [navigator]
+  );
+
+  return navigate;
 }
 
 export function useLocation() {
   const {location} = useContext(NavigationContext);
-  // todo 详细实现
   return location;
 }
 
 export function useOutlet() {
   return useContext(RouterContext).outlet;
+}
+
+export function useParams() {
+  const matches = useContext(RouterContext);
+  // 父子，数组的最后一个元素是最后一层
+  const routeMatch = matches[matches.length - 1];
+
+  return routeMatch ? routeMatch.params : {};
+}
+
+// todo  useParams | useMatch | useResolvedPath
+
+export function useMatch(pattern) {
+  const {pathname} = useLocation();
+  return matchPath(pattern, pathname);
+}
+
+export function useResolvedPath(to) {
+  return {
+    pathname: to,
+  };
 }

@@ -5,6 +5,8 @@ import NavLink from "./NavLink";
 import Outlet from "./Outlet";
 import Navigate from "./Navigate";
 import {useNavigate, useParams, useLocation} from "./hooks";
+import createBrowserRouter from "./createBrowserRouter";
+import RouterProvider from "./RouterProvider";
 
 export {
   BrowserRouter,
@@ -16,4 +18,6 @@ export {
   useParams,
   useLocation,
   Navigate,
+  createBrowserRouter,
+  RouterProvider,
 };
