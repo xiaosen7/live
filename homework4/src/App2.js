@@ -1,5 +1,5 @@
 import React from "react";
-import {createBrowserRouter, RouterProvider} from "./which";
+import { createBrowserRouter, RouterProvider } from "./which";
 
 import Home from "./pages/Home";
 import Product from "./pages/Product";
@@ -8,9 +8,9 @@ import CustomLink from "./components/CustomLink";
 import ProductDetail from "./pages/ProductDetail";
 import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
-import AuthProvider, {RequireAuth} from "./layouts/AuthProvider";
+import AuthProvider, { RequireAuth } from "./layouts/AuthProvider";
 import Layout from "./layouts/Layout";
-import DataLoading, {loaderOfDataLoading} from "./pages/DataLoading";
+import DataLoading, { loaderOfDataLoading } from "./pages/DataLoading";
 
 const AboutLazy = React.lazy(() => import("./pages/AboutLazy"));
 

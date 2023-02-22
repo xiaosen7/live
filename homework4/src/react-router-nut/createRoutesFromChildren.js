@@ -11,6 +11,7 @@ export default function createRoutesFromChildren(children) {
     const route = {
       path: child.props.path,
       element: child.props.element,
+      id: Math.random().toString(32).slice(2),
     };
 
     if (child.props.children) {

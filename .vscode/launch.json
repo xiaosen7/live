@@ -5,6 +5,23 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch via NPM",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "start"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "cwd": "${workspaceFolder}/homework4"
+    },
+    {
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/homework4/node_modules/.bin/react-scripts",
+      "args": ["start"],
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "针对 localhost 启动 Chrome",

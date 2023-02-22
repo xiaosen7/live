@@ -1,5 +1,5 @@
-import {Suspense} from "react";
-import {useLoaderData} from "../which";
+import { Suspense } from "react";
+import { useLoaderData } from "../which";
 
 export default function DataLoading(props) {
   const data = useLoaderData();
@@ -15,6 +15,8 @@ export default function DataLoading(props) {
 }
 
 export async function loaderOfDataLoading() {
-  const user = await fetch("https://randomuser.me/api");
+  const user = await fetch("https://randomuser.me/api").then((res) =>
+    res.json()
+  );
   return user;
 }

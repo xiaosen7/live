@@ -5,5 +5,5 @@ export default function createBrowserRouter(routes) {
   return createRouter({
     history: createBrowserHistory(),
     routes,
-  });
+  }).initialize();
 }
