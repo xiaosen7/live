@@ -1,0 +1,8 @@
+{
+  "name": "my-react-reconcile",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "my-shared": "workspace:^1.0.0"
+  }
+}
