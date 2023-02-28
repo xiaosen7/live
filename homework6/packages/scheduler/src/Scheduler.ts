@@ -167,12 +167,23 @@ function workLoop(hasTimeRemaining, initialTime) {
   let currentTime = initialTime;
   advanceTimers(currentTime);
   currentTask = peek(taskQueue);
-  while (
-    currentTask !== null &&
-    currentTask.expirationTime <= currentTime &&
-    hasTimeRemaining &&
-    !shouldYieldToHost()
-  ) {
+  while (currentTask !== null) {
+    // currentTask.expirationTime可以理解为当前任务应该执行的最迟时间点，但是呢在这之前如果时间片还有（shouldYieldToHost返回false），也可以执行当前任务
+    // break的条件是：任务还没到最迟时间点 && 时间片不够了
+    // 也就是说如果 当前时间 >= 任务最迟执行时间点 的时候，不管时间片够不够都要执行（尽管shouldYieldToHost返回true）
+    if (
+      /** 现在时间还早，任务执行不执行都无所谓 */ currentTask.expirationTime >
+        currentTime &&
+      (!hasTimeRemaining ||
+        /** 应该让出cpu控制权（时间片不够了） */ shouldYieldToHost())
+    ) {
+      // This currentTask hasn't expired, and we've reached the deadline.
+      break;
+    }
+
+    // 到这里只有两种情况
+    // 1. 任务到了最迟执行的时间了（currentTime > expirationTime）
+    // 2. 任务没到最迟执行时间但有时间片还有剩余
     const callback = currentTask.callback;
     if (typeof callback === "function") {
       currentTask.callback = null;
