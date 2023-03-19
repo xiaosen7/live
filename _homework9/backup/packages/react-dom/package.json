@@ -1,0 +1,8 @@
+{
+  "name": "my-react-dom",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "my-react-reconcile": "workspace:^1.0.0"
+  }
+}

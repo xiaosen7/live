@@ -19,12 +19,12 @@ const element = (
   <main className="border">
     <h1>react</h1>
     <a href="https://github.com/bubucuo/mini-react">mini react</a>
-
     <ClassComponent name="ClassComponent" />
     <>
       <FunctionComponent name="FunctionComponent" />
     </>
     <>Fragment</>
+    13222
   </main>
 );
 
